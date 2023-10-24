@@ -1,0 +1,53 @@
+﻿@model Photo
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1>Szczegóły</h1>
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                Wykonano
+            </th>
+            <th>
+                Opis
+            </th>
+            <th>
+                Nazwa
+            </th>
+            <th>
+                Autor
+            </th>
+            <th>
+                Rozdzielczość
+            </th>
+            <th>
+                Format
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.Wykonano
+            </td>
+            <td>
+                @Model.Opis
+            </td>
+            <td>
+                @Model.Nazwa
+            </td>
+            <td>
+                @Model.Autor
+            </td>
+            <td>
+                @Model.Rozdzielczość
+            </td>
+            <td>
+                @Model.Format
+            </td>
+        </tr>
+    </table>
+    <a class="btn btn-secondary" asp-controller="Photo" asp-action="Index">Nie</a>
+</div>
