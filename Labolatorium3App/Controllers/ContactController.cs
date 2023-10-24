@@ -5,11 +5,18 @@ namespace Labolatorium3App.Controllers
 {
     public class ContactController : Controller
     {
-        static readonly Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
-        static int index = 1;
+        //static readonly Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
+        //static int index = 1;
+        private readonly IContactService _contactService;
+
+        public ContactController(IContactService contactService)
+        {
+            _contactService = contactService;
+        }
+
         public IActionResult Index()
         {
-            return View(_contacts);
+            return View(_contactService.FindAll());
         }
 
         [HttpGet]
@@ -22,16 +29,19 @@ namespace Labolatorium3App.Controllers
         {
             if(ModelState.IsValid)
             {
-                model.Id = index++;
-                _contacts[model.Id] = model;
+                _contactService.Add(model);
+                // model.Id = index++;
+                // _contacts[model.Id] = model;
                 return RedirectToAction("Index");
+            } else
+            {
+                return View();
             }
-            return View();
         }
         [HttpGet]
         public IActionResult Update(int id)
         {
-            return View(_contacts[id]);
+            return View(_contactService.FindById(id));
         }
 
         [HttpPost]
@@ -39,7 +49,7 @@ namespace Labolatorium3App.Controllers
         {
             if (ModelState.IsValid)
             {
-                _contacts[model.Id] = model;
+                _contactService.Update(model);
                 return RedirectToAction("Index");
             }
             return View();
@@ -48,13 +58,22 @@ namespace Labolatorium3App.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            return View(_contacts[id]);
+            return View(_contactService.FindById(id));
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View(_contacts[id]);
+            return View(_contactService.FindById(id));
         }
+
+        [HttpPost]
+        public IActionResult Delete(Contact model)
+        {
+            _contactService.Delete(model.Id);
+            return RedirectToAction("Index");
+        }
+
+
     }
 }

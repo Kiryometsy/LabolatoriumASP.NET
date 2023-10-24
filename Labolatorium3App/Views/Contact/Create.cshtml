@@ -7,7 +7,7 @@
 <h1>Dodawanie kontaktu</h1>
 <form asp-controller="Contact" asp-action="Create" method="post">
     <div class="mb-3">
-        <label asp-for="Name">Imię</label>
+        <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name" /><br/>
         <span class="text-danger" asp-validation-for="Name"></span>
     </div>
@@ -28,6 +28,14 @@
         <label asp-for="Phone">Telefon</label>
         <input class="form-control" asp-for="Phone" /><br />
         <span class="text-danger" asp-validation-for="Phone"></span>
+    </div>
+
+    <div>
+        <label asp-for="Priority"></label>
+        <div>
+            <span asp-validation-for="Priority" class="text-danger"></span>
+        </div>
+        <select class="mb-3 form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
     </div>
 
     <div class="mb-3">
