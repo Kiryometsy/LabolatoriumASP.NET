@@ -24,10 +24,13 @@ namespace Labolatorium3App.Models
         public string Email { get; set; }
         [Phone(ErrorMessage = "Niepoprawny numer telefonu, wpisz cyfry!")]
         public string Phone { get; set; }
-        
+
+        [DataType(DataType.Date)]
         public DateTime Birth { get; set; }
 
-
+        public DateTime created;
+        [HiddenInput]
+        public DateTime Created { get { return created; } }
 
     }
 }
