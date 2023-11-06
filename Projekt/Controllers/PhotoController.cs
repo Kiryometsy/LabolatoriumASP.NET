@@ -5,11 +5,17 @@ namespace Projekt.Controllers
 {
     public class PhotoController : Controller
     {
-        static readonly Dictionary<int, Photo> _photos = new Dictionary<int, Photo>();
-        static int index = 1;
+        //static readonly Dictionary<int, Photo> _photos = new Dictionary<int, Photo>();
+        //static int index = 1;
+        private readonly IPhotoService _photoService;
+
+        public PhotoController(IPhotoService photoService)
+        {
+            _photoService = photoService;
+        }
         public IActionResult Index()
         {
-            return View(_photos);
+            return View(_photoService.FindAll());
         }
 
         [HttpGet]
@@ -22,16 +28,18 @@ namespace Projekt.Controllers
         {
             if(ModelState.IsValid)
             {
-                model.Id = index++;
-                _photos[model.Id] = model;
+                _photoService.Add(model);
                 return RedirectToAction("Index");
             }
-            return View();
+            else
+            {
+                return View();
+            }
         }
         [HttpGet]
         public IActionResult Update(int id)
         {
-            return View(_photos[id]);
+            return View(_photoService.FindById(id));
         }
 
         [HttpPost]
@@ -39,7 +47,7 @@ namespace Projekt.Controllers
         {
             if (ModelState.IsValid)
             {
-                _photos[model.Id] = model;
+                _photoService.Update(model);
                 return RedirectToAction("Index");
             }
             return View();
@@ -48,19 +56,19 @@ namespace Projekt.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            return View(_photos[id]);
+            return View(_photoService.FindById(id));
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View(_photos[id]);
+            return View(_photoService.FindById(id));
         }
 
         [HttpPost]
         public IActionResult Delete(Photo model)
         {
-            _photos.Remove(model.Id);
+            _photoService.Delete(model.Id);
             return RedirectToAction("Index");
         }
     }

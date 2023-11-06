@@ -4,10 +4,10 @@
 *@
 @{
 }
-<h1>Edycja kontaktu</h1>
+<h1>Dodawanie kontaktu</h1>
 <form asp-controller="Contact" asp-action="Update" method="post">
     <div class="mb-3">
-        <label asp-for="Name">Imię</label>
+        <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name" /><br />
         <span class="text-danger" asp-validation-for="Name"></span>
     </div>
@@ -30,7 +30,15 @@
         <span class="text-danger" asp-validation-for="Phone"></span>
     </div>
 
+    <div>
+        <label asp-for="Priority"></label>
+        <div>
+            <span asp-validation-for="Priority" class="text-danger"></span>
+        </div>
+        <select class="mb-3 form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
+    </div>
+
     <div class="mb-3">
-        <button class="btn btn-primary" type="submit">Zapisz</button>
+        <button class="btn btn-primary" type="submit">Zaktualizuj</button>
     </div>
 </form>

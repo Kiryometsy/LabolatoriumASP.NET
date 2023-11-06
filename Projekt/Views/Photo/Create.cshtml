@@ -4,42 +4,44 @@
 *@
 @{
 }
-<h1>Dodawanie kontaktu</h1>
+<h1>Dodawanie Zdjęcia</h1>
 <form asp-controller="Photo" asp-action="Create" method="post">
     <div class="mb-3">
-        <label asp-for="Wykonano">Wykonano</label>
+        <label asp-for="Wykonano"></label>
         <input class="form-control" asp-for="Wykonano" /><br />
         <span class="text-danger" asp-validation-for="Wykonano"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Opis">Opis</label>
+        <label asp-for="Opis"></label>
         <input class="form-control" asp-for="Opis" /><br/>
         <span class="text-danger" asp-validation-for="Opis"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Nazwa">Nazwa zdjęcia</label>
+        <label asp-for="Nazwa"></label>
         <input class="form-control" asp-for="Nazwa" /><br/>
         <span class="text-danger" asp-validation-for="Nazwa"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Autor">Imię i Nazwisko</label>
+        <label asp-for="Autor"></label>
         <input class="form-control" asp-for="Autor" /><br />
         <span class="text-danger" asp-validation-for="Autor"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Rozdzielczość">Rozdzielczość</label>
+        <label asp-for="Rozdzielczość"></label>
         <input class="form-control" asp-for="Rozdzielczość" /><br />
         <span class="text-danger" asp-validation-for="Rozdzielczość"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Format">Format</label>
-        <input class="form-control" asp-for="Format" /><br />
-        <span class="text-danger" asp-validation-for="Format"></span>
+    <div>
+        <label asp-for="Format"></label>
+        <div>
+            <span asp-validation-for="Format" class="text-danger"></span>
+        </div>
+        <select class="mb-3 form-control" asp-for="Format" asp-items="@Html.GetEnumSelectList<Format>()"></select>
     </div>
 
     <div class="mb-3">

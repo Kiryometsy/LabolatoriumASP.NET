@@ -1,4 +1,4 @@
-﻿@model Dictionary<int, Photo>
+﻿@model List<Photo>
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -7,40 +7,44 @@
 
 <h1>Lista zdjęć</h1>
 <div>
-    <table class="table">
-        <tr>
-            <th>
-                Data
-            </th>
-            <th>
-                Nazwa
-            </th>
-            <th>
-                Autor
-            </th>
-            <th>
-                Akcje
-                <a class="btn btn-primary" asp-controller="Photo" asp-action="Create">Nowy</a>
-            </th>
-        </tr>
-        @foreach (var item in @Model)
-        {
+    @if (Model.Count > 0)
+    {
+        <table class="table">
             <tr>
-                <td>
-                    @item.Value.Wykonano
-                </td>
-                <td>
-                    @item.Value.Nazwa
-                </td>
-                <td>
-                    @item.Value.Autor
-                </td>
-                <td>
-                    <a class="btn btn-primary" asp-controller="Photo" asp-action="Update" asp-route-id="@item.Value.Id">Edycja</a>
-                    <a class="btn btn-outline-info" asp-controller="Photo" asp-action="Details" asp-route-id="@item.Value.Id">Szczegóły</a>
-                    <a class="btn btn-outline-danger" asp-controller="Photo" asp-action="Delete" asp-route-id="@item.Value.Id">Usuń</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(i => Model[0].Wykonano)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(i => Model[0].Nazwa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(i => Model[0].Autor)
+                </th>
+                <th>
+                    Akcje
+                    <!-- Do sprawdzenia-->
+                    <a class="btn btn-primary" asp-controller="Photo" asp-action="Create">Nowy</a>
+                </th>
             </tr>
-        }
-    </table>
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td>
+                        @item.Wykonano
+                    </td>
+                    <td>
+                        @item.Nazwa
+                    </td>
+                    <td>
+                        @item.Autor
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Photo" asp-action="Update" asp-route-id="@item.Id">Edycja</a>
+                        <a class="btn btn-outline-info" asp-controller="Photo" asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
+                        <a class="btn btn-outline-danger" asp-controller="Photo" asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
 </div>
