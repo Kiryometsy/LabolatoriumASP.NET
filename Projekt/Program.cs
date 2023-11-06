@@ -11,6 +11,7 @@ namespace Projekt
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddSingleton<IPhotoService, MemoryPhotoService>();
+            builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 
             var app = builder.Build();
 

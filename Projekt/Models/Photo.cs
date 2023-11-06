@@ -34,5 +34,7 @@ namespace Projekt.Models
         [Required(ErrorMessage = "Wybierz Format")]
         [Display(Name = "Wybierz Format")]
         public Format Format { get; set; }
+        [HiddenInput]
+        public DateTime Created { get; set; }
     }
 }

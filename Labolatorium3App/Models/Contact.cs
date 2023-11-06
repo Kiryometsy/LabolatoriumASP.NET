@@ -28,9 +28,8 @@ namespace Labolatorium3App.Models
         [DataType(DataType.Date)]
         public DateTime Birth { get; set; }
 
-        public DateTime created;
         [HiddenInput]
-        public DateTime Created { get { return created; } }
+        public DateTime Created { get; set; }
 
     }
 }

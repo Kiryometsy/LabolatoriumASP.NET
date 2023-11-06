@@ -12,7 +12,7 @@
         public int Add(Contact item)
         {
             int id = _items.Keys.Count != 0 ? _items.Keys.Max() : 0;
-            item.created = _timeProvider.Actual();
+            item.Created = _timeProvider.Actual();
             item.Id = id + 1;
             _items.Add(item.Id, item);
             return item.Id;
