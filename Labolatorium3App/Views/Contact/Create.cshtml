@@ -25,6 +25,11 @@
     </div>
 
     <div class="mb-3">
+        <label asp-for="OrganizationId">Organizacja</label>
+        <select class="form-control" asp-for="OrganizationId" asp-items=@Model.Organizations></select><br />
+    </div>
+
+    <div class="mb-3">
         <label asp-for="Phone">Telefon</label>
         <input class="form-control" asp-for="Phone" /><br />
         <span class="text-danger" asp-validation-for="Phone"></span>

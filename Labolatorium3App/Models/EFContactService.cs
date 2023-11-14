@@ -47,5 +47,10 @@ namespace Labolatorium3App.Models
             _context.Update(entity);
             _context.SaveChanges();
         }
+
+        public List<OrganizationEntity> FindAllOrganizations()
+        {
+            return _context.Organizations.ToList();
+        }
     }
 }

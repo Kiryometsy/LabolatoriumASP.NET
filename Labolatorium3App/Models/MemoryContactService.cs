@@ -1,4 +1,6 @@
-﻿namespace Labolatorium3App.Models
+﻿using Data.Entities;
+
+namespace Labolatorium3App.Models
 {
     public class MemoryContactService : IContactService
     {
@@ -26,6 +28,11 @@
         public List<Contact> FindAll()
         {
             return _items.Values.ToList();
+        }
+
+        public List<OrganizationEntity> FindAllOrganizations()
+        {
+            throw new NotImplementedException();
         }
 
         public Contact? FindById(int id)

@@ -22,7 +22,14 @@ namespace Labolatorium3App.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            Contact model = new Contact();
+            model.Organizations = _contactService.FindAllOrganizations()
+                .Select(oe => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem()
+                {
+                    Text = oe.Name,
+                    Value = oe.Id.ToString()
+                }).ToList();
+            return View(model);
         }
         [HttpPost]
         public IActionResult Create(Contact model)
