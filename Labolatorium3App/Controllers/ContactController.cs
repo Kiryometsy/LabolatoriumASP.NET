@@ -1,19 +1,19 @@
 ﻿using Labolatorium3App.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Labolatorium3App.Controllers
 {
+    [Authorize]
     public class ContactController : Controller
     {
-        //static readonly Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
-        //static int index = 1;
         private readonly IContactService _contactService;
 
         public ContactController(IContactService contactService)
         {
             _contactService = contactService;
         }
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_contactService.FindAll());
