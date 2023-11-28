@@ -13,6 +13,11 @@ namespace Labolatorium3App.Controllers
         {
             _contactService = contactService;
         }
+        public IActionResult PagedIndex(int? page = 1, int? size = 2)
+        {
+            return View(_contactService.FindPage((int)page, (int)size));
+        }
+
         [AllowAnonymous]
         public IActionResult Index()
         {
