@@ -37,14 +37,32 @@ namespace Labolatorium3App.Controllers
             if(ModelState.IsValid)
             {
                 _contactService.Add(model);
-                // model.Id = index++;
-                // _contacts[model.Id] = model;
                 return RedirectToAction("Index");
             } else
             {
                 return View();
             }
         }
+        
+        public IActionResult CreateApi()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateApi(Contact model)
+        {
+            if (ModelState.IsValid)
+            {
+                _contactService.Add(model);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
         [HttpGet]
         public IActionResult Update(int id)
         {

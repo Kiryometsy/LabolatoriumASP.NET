@@ -1,0 +1,72 @@
+﻿@model Contact
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Dodawanie kontaktu</h1>
+<form asp-controller="Contact" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" /><br />
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email">Email</label>
+        <input class="form-control" asp-for="Email" /><br />
+        <span class="text-danger" asp-validation-for="Email"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Birth">Data Urodzenia</label>
+        <input class="form-control" asp-for="Birth" /><br />
+        <span class="text-danger" asp-validation-for="Birth"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="OrganizationId">Organizacja</label>
+        <input type="text" id="filter" />
+        <select class="form-control" asp-for="OrganizationId"></select><br />
+        <a asp-action="CreateApi" asp-controller="Organization">Dodaj nową organizację</a>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Phone">Telefon</label>
+        <input class="form-control" asp-for="Phone" /><br />
+        <span class="text-danger" asp-validation-for="Phone"></span>
+    </div>
+
+    <div>
+        <label asp-for="Priority"></label>
+        <div>
+            <span asp-validation-for="Priority" class="text-danger"></span>
+        </div>
+        <select class="mb-3 form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Utwórz</button>
+        <button class="btn btn-secondary" type="reset">Wyczyść</button>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        const select = document.getElementById("OrganizationId");
+        const filter = document.getElementById("filter");
+        filter.onchange = function(){
+        select.innerHTML = "";
+        fetch(`/api/organizations/filter?q=${filter.value}`)
+        .then(response => response.json())
+        .then(arr => {
+            for(let org of arr){
+                let option = document.createElement('option');
+                option.setAttribute('value', org.id);
+                option.innerText = org.name;
+                select.appendChild(option);
+            }
+        });
+        }
+    </script>
+}
