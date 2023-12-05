@@ -36,10 +36,10 @@ namespace Labolatorium3App
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            
             app.UseRouting();
-            app.UseAuthentication();;
-
+            app.UseMiddleware<LastVisitCookie>();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             app.MapRazorPages();

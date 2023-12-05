@@ -37,7 +37,11 @@ namespace Labolatorium3App.Models
 
         public Contact? FindById(int id)
         {
-            return _items[id];
+            if (_items.ContainsKey(id))
+            {
+                return _items[id];
+            }
+            return null;
         }
 
         public PagingList<Contact> FindPage(int page, int size)
